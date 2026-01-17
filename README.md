@@ -231,6 +231,131 @@ nano /var/www/projectLEMP/index.php
 
 ---
 
+## Phase 7: Data Retrieval from MySQL with PHP
+
+In this final phase, we establish a dynamic connection by creating a test database with a "To do list" and configuring the Nginx website to query and display this data.
+
+### 7.1 Database and User Configuration
+
+First, connect to the MySQL console to provision the backend storage:
+
+* **Access MySQL Shell:**
+```bash
+sudo mysql
+
+```
+
+
+* **Create a new database:**
+```sql
+CREATE DATABASE `example_database`;
+
+```
+
+
+* **Create a dedicated user and grant privileges:**
+```sql
+CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';
+GRANT ALL ON example_database.* TO 'example_user'@'%';
+exit
+
+```
+
+
+
+### 7.2 Table Creation and Data Entry
+
+Now, login as the new user to create a test table and insert sample records:
+
+* **Login as the custom user:**
+```bash
+mysql -u example_user -p
+
+```
+
+
+* **Create the `todo_list` table:**
+```sql
+CREATE TABLE example_database.todo_list (
+  item_id INT AUTO_INCREMENT,
+  content VARCHAR(255),
+  PRIMARY KEY(item_id)
+);
+
+```
+
+
+* **Insert sample data:**
+```sql
+INSERT INTO example_database.todo_list (content) VALUES ('Meditation + Prayer');
+INSERT INTO example_database.todo_list (content) VALUES ('Vim/Bash commands reps');
+INSERT INTO example_database.todo_list (content) VALUES ('Assigned Tasks & Assignments');
+INSERT INTO example_database.todo_list (content) VALUES ('Work-outs');
+INSERT INTO example_database.todo_list (content) VALUES ('+1 Bible Chapter');
+
+```
+
+
+* **Verify records and exit:**
+```sql
+SELECT * FROM example_database.todo_list;
+exit
+
+```
+
+
+
+> **Expected Output:** You should see your rows of data displayed in the terminal.
+>![Web Preview](screenshoots/10.png)
+
+---
+
+### 7.3 Dynamic PHP Script Deployment
+
+Finally, create a PHP script that connects to MySQL and renders the list in your browser.
+
+* **Create the PHP file:**
+```bash
+nano /var/www/projectLEMP/todo_list.php
+
+```
+
+
+* **Paste the following logic:**
+```php
+<?php
+$user = "example_user";
+$password = "PassWord.1";
+$database = "example_database";
+$table = "todo_list";
+
+try {
+  $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+  echo "<h2>TODO</h2><ol>";
+  foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+  }
+  echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+?>
+
+```
+
+
+* **Access via Browser:**
+```text
+http://<YOUR_PUBLIC_IP>/todo_list.php
+
+```
+
+
+
+> **Web Preview:** A numbered list titled **"TODO"** should appear, showing the items you inserted into your database.
+>![Web Preview](screenshoots/11.png)
+
 ## Conclusion and Cleanup
 
 The LEMP stack is fully operational. To maintain security, remove diagnostic files:
