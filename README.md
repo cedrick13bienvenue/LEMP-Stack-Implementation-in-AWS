@@ -55,3 +55,43 @@ http://<YOUR_PUBLIC_IP>:80
 > ![Networking and Verification](screenshoots/2.png)
 
 ---
+
+## Phase 2: Data Persistence Layer (MySQL)
+
+A relational database is required to store application data and manage user records.
+
+### 2.1 Installation
+
+* **Install MySQL Server**
+```bash
+sudo apt install mysql-server
+
+```
+
+
+* **Access MySQL Shell**
+```bash
+sudo mysql
+
+```
+
+
+
+> **Expected Output:** The MySQL administrative prompt `mysql>` should appear.
+> ![The MySQL administrative prompt](screenshoots/3.png)
+
+
+### 2.2 Security Hardening
+
+Run the security script to set a root password, remove anonymous users, and disable remote root logins:
+
+```bash
+sudo mysql_secure_installation
+
+```
+
+> **Expected Output:** The script should guide you through the configuration and finish with **"Success. All done!"**.
+> ![The MySQL administrative prompt](screenshoots/4.png)
+
+---
+
