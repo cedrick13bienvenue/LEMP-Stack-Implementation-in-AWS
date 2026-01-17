@@ -95,3 +95,29 @@ sudo mysql_secure_installation
 
 ---
 
+## Phase 3: Application Layer (PHP)
+
+Unlike Apache, Nginx does not contain a native PHP module. It requires **PHP-FPM** (FastCGI Process Manager) to process PHP scripts and pass them to the web server.
+
+### 3.1 Installation
+
+* **Install PHP-FPM and PHP-MySQL**
+```bash
+sudo apt install php-fpm php-mysql
+
+```
+
+
+* **Verify PHP installation**
+```bash
+php -v
+
+```
+
+
+
+> **Expected Output:** PHP version information such as **"PHP 8.3.6"** should be displayed.
+> ![PHP version](screenshoots/5.png)
+
+---
+
