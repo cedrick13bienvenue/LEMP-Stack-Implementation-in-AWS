@@ -121,3 +121,66 @@ php -v
 
 ---
 
+## Phase 4: Server Block Configuration and Directory Setup
+
+Nginx uses **Server Blocks** (similar to Virtual Hosts in Apache) to encapsulate configuration details and host multiple domains on a single server.
+
+### 4.1 Custom Web Root Setup
+
+* **Create project directory**
+```bash
+sudo mkdir /var/www/projectLEMP
+
+```
+
+
+* **Assign ownership**
+```bash
+sudo chown -R $USER:$USER /var/www/projectLEMP
+
+```
+
+
+* **Create Nginx server block configuration**
+```bash
+sudo nano /etc/nginx/sites-available/projectLEMP
+
+```
+>![Web Preview](screenshoots/6.png)
+
+
+### 4.2 Activation and Testing
+
+* **Link configuration to sites-enabled**
+```bash
+sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
+
+```
+
+
+* **Disable default Nginx host**
+```bash
+sudo unlink /etc/nginx/sites-enabled/default
+
+```
+
+
+* **Test Nginx configuration syntax**
+```bash
+sudo nginx -t
+
+```
+
+
+* **Reload Nginx**
+```bash
+sudo systemctl reload nginx
+
+```
+
+
+
+> **Expected Output:** The syntax check should return **"syntax is ok"** and **"test is successful"**.
+>![Web Preview](screenshoots/7.png)
+
+---
