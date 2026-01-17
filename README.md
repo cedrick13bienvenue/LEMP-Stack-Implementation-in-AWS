@@ -184,3 +184,23 @@ sudo systemctl reload nginx
 >![Web Preview](screenshoots/7.png)
 
 ---
+
+## Phase 5: Custom Web Root Validation (Static Content)
+
+We verify that the Nginx Server Block is correctly serving static files from our custom directory.
+
+### 5.1 Static Index Test
+
+* **Create a custom index file** using server metadata:
+```bash
+sudo echo 'Hello LEMP from hostname' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
+
+```
+
+
+* **Access via browser:** `http://<YOUR_PUBLIC_IP>:80`
+
+> **Web Preview:** A plain text line showing your instance's unique DNS name and IP address should appear.
+>![Web Preview](screenshoots/8.png)
+
+---
