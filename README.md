@@ -231,6 +231,18 @@ nano /var/www/projectLEMP/index.php
 
 ---
 
+## Cleanup
+
+The LEMP stack is fully operational. To maintain security, remove diagnostic files:
+
+```bash
+sudo rm /var/www/projectLEMP/index.php
+sudo rm /var/www/projectLEMP/index.html
+
+```
+
+---
+
 ## Phase 7: Data Retrieval from MySQL with PHP
 
 In this final phase, we establish a dynamic connection by creating a test database with a "To do list" and configuring the Nginx website to query and display this data.
@@ -356,14 +368,5 @@ http://<YOUR_PUBLIC_IP>/todo_list.php
 > **Web Preview:** A numbered list titled **"TODO"** should appear, showing the items you inserted into your database.
 >![Web Preview](screenshoots/11.png)
 
-## Conclusion and Cleanup
-
-The LEMP stack is fully operational. To maintain security, remove diagnostic files:
-
-```bash
-sudo rm /var/www/projectLEMP/index.php
-sudo rm /var/www/projectLEMP/index.html
-
-```
 
 ---
