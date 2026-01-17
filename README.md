@@ -204,3 +204,41 @@ sudo echo 'Hello LEMP from hostname' $(TOKEN=`curl -X PUT "http://169.254.169.25
 >![Web Preview](screenshoots/8.png)
 
 ---
+
+## Phase 6: PHP Integration and Precedence (Dynamic Content)
+
+The final phase validates that Nginx is correctly communicating with **PHP-FPM**.
+
+### 6.1 PHP-FPM Diagnostic Test
+
+* **Create the test file:**
+```bash
+nano /var/www/projectLEMP/index.php
+
+```
+
+
+```php
+<?php phpinfo(); ?>
+
+```
+
+
+* **Access via browser:** `http://<YOUR_PUBLIC_IP>:80/index.php`
+
+> **Web Preview:** The purple **PHP Version Information Page** should be displayed.
+>![Web Preview](screenshoots/9.png)
+
+---
+
+## Conclusion and Cleanup
+
+The LEMP stack is fully operational. To maintain security, remove diagnostic files:
+
+```bash
+sudo rm /var/www/projectLEMP/index.php
+sudo rm /var/www/projectLEMP/index.html
+
+```
+
+---
