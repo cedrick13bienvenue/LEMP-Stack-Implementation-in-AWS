@@ -1,4 +1,4 @@
-# Project: LEMP Stack Implementation on AWS
+# LEMP Stack Implementation on AWS
 
 ## Project Overview
 
